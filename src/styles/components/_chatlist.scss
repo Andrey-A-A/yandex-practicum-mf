@@ -1,0 +1,70 @@
+.index-chats {
+  & .chats__list {
+    &:hover {
+      background-color: $green;
+    }
+  }
+}
+
+.selected-chat {
+  & .chats__list {
+    &.active {
+      background: $active;
+    }
+    &:hover {
+      background-color: $green;
+    }
+  }
+}
+
+.chats__list {
+  display: flex;
+  width: 95%;
+  margin: 0 1rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.1rem solid $darkgreen;
+
+  &-avatar {
+    margin: auto;
+    padding-right: 1rem;
+    width: 5rem;
+    height: 5rem;
+  }
+  &-content {
+    padding-right: 0.5rem;
+    margin: auto;
+    flex-basis: 20rem;
+  }
+  &-nickname {
+    font-size: 1.8rem;
+    color: $darkgreen;
+  }
+  &-text {
+    font-size: 1.3rem;
+  }
+  &-time {
+    font-size: 0.9rem;
+    color: $green;
+    padding: 0 0 1rem 0;
+  }
+  &-number {
+    margin: 0 auto;
+    width: 2rem;
+    height: 2rem;
+    background: $darkgreen;
+    border-radius: 50%;
+    position: relative;
+    & div {
+      width: 1.8rem;
+      margin: auto;
+      position: absolute;
+      top: 50%;
+      margin-top: -0.5rem;
+      font-size: 1.2rem;
+      color: white;
+      line-height: 1rem;
+      text-align: center;
+    }
+  }
+}

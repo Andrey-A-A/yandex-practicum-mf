@@ -1,0 +1,35 @@
+.message {
+  display: flex;
+  //flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 4rem 0 2rem 0;
+  &__content {
+    align-self: flex-start;
+    font-size: 2rem;
+    background: $background;
+    @include min-max-m(30rem, 40rem, 1rem, 3rem);
+    &-time {
+      color: $darkgreen;
+      margin: 0 0 0 auto;
+      width: 6rem;
+    }
+  }
+  &__answer {
+    align-self: flex-end;
+    background: $background;
+    width: 15rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 3rem;
+    padding: 0.5rem;
+    &-text {
+      font-size: 2rem;
+    }
+    &-time {
+      font-size: 1.2rem;
+      color: $darkgreen;
+    }
+  }
+}

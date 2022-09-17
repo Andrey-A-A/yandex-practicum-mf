@@ -1,0 +1,33 @@
+.error {
+  @include min-max(32rem, 50rem, 0);
+  &__title {
+    color: $darkgreen;
+    font-size: 8.6rem;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 8rem;
+  }
+  &__description {
+    color: $red;
+    font-size: 3rem;
+    text-align: center;
+    font-weight: bold;
+  }
+  &__wrap {
+    margin: 2rem auto;
+    & p:first-child {
+      font-size: 2.6rem;
+      text-align: center;
+    }
+    & p:last-child {
+      margin: 3rem;
+      text-align: center;
+      font-size: 1.6rem;
+      & .error__link {
+        font-size: 1.6rem;
+        color: $darkgreen;
+        font-weight: bold;
+      }
+    }
+  }
+}

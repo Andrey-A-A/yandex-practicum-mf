@@ -1,0 +1,15 @@
+@import 'base/variables';
+@import 'base/normalize';
+@import 'base/mixins';
+@import 'pages/chats';
+@import 'pages/profile';
+@import 'pages/changing-profile';
+@import 'pages/404';
+@import 'pages/500';
+
+body {
+  font-size: 10px;
+  .main {
+    @include min-max(32rem, 127rem, 0);
+  }
+}

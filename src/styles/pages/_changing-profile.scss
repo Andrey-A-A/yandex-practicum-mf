@@ -1,0 +1,48 @@
+@import '../components/btn';
+
+.change__form {
+  @include min-max-m(32rem, 50rem, 1.5rem, 0);
+  margin: 0 auto 2rem;
+  display: flex;
+  flex-direction: column;
+  background: $background;
+  border-radius: 1rem;
+}
+
+.change__data {
+  margin: 0;
+  padding: 0.5rem 1.5rem;
+
+  &-list {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    color: $black;
+    border-bottom: 0.1rem solid $darkgreen;
+    line-height: 1.5rem;
+    padding-top: 1rem;
+    & span {
+      padding-bottom: 0.5rem;
+    }
+    & .change input {
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 0 0 0 auto;
+      width: 10rem;
+      &::-webkit-input-placeholder {
+        color: $darkgray;
+        text-align: right;
+      }
+      &::-moz-placeholder {
+        color: $darkgray;
+      } /* Firefox 19+ */
+      &:-moz-placeholder {
+        color: $darkgray;
+      } /* Firefox 18- */
+      &:-ms-input-placeholder {
+        color: $darkgray;
+      }
+    }
+  }
+}

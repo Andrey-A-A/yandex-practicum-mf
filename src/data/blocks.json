@@ -1,0 +1,74 @@
+[
+  {
+    "active": "active",
+    "src": "../assets/img/avatar.svg",
+    "nikname": "Степан",
+    "last-message": "новое полученное сообщение",
+    "time": "15.00",
+    "quantity": "4",
+    "link": "./chats.hbs"
+  },
+  {
+    "active": "",
+    "src": "../assets/img/man.png",
+    "nikname": "Петя",
+    "last-message": "последнее полученное сообщение",
+    "time": "ВТ",
+    "quantity": "",
+    "link": "./chats.hbs"
+  },
+  {
+    "active": "",
+    "src": "../assets/img/avatar.svg",
+    "nikname": "Володя",
+    "last-message": "жизнь хороша и жить хорошо",
+    "time": "ВТ",
+    "quantity": "3",
+    "link": "./chats.hbs"
+  },
+  {
+    "active": "",
+    "src": "../assets/img/man.png",
+    "nikname": "Петя",
+    "last-message": "последнее полученное сообщение",
+    "time": "ВТ",
+    "quantity": "",
+    "link": "./chats.hbs"
+  },
+  {
+    "active": "",
+    "src": "../assets/img/avatar.svg",
+    "nikname": "Таня",
+    "last-message": "Какой хороший день!",
+    "time": "06.00",
+    "quantity": "1",
+    "link": "./chats.hbs"
+  },
+  {
+    "active": "",
+    "src": "../assets/img/avatar.svg",
+    "nikname": "Тамара",
+    "last-message": "Ждите хороших новостей...",
+    "time": "12.45",
+    "quantity": "6",
+    "link": "./chats.hbs"
+  },
+  {
+    "active": "",
+    "src": "../assets/img/man.png",
+    "nikname": "Игорь",
+    "last-message": "Мороз и солнце, день...",
+    "time": "Пт",
+    "quantity": "",
+    "link": "./chats.hbs"
+  },
+  {
+    "active": "",
+    "src": "../assets/img/avatar.svg",
+    "nikname": "Владимир",
+    "last-message": "Всем здравствуйте!",
+    "time": "23.00,",
+    "quantity": "3",
+    "link": "./500.hbs"
+  }
+]

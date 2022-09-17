@@ -1,0 +1,54 @@
+@import '../components/avatar';
+
+.wrap {
+  @include min-max(32rem, 100%, 0);
+  & h1 {
+    font-size: 2rem;
+    color: $darkgreen;
+    font-weight: bold;
+    text-align: center;
+  }
+  & .name {
+    color: $darkgreen;
+    font-size: 2.4rem;
+    margin: 0 auto;
+    width: 10rem;
+    text-align: center;
+  }
+}
+
+.data {
+  @include min-max-m(32rem, 50rem, 1rem, 0);
+  background: $background;
+  margin: 0 auto;
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    color: $black;
+    border-bottom: 0.1rem solid $darkgreen;
+    line-height: 1.5rem;
+    padding-top: 1.5rem;
+    & span {
+      padding-bottom: 0.5rem;
+    }
+  }
+}
+
+.management {
+  @include min-max(32rem, 50rem, 0);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+
+  & a {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1rem;
+    color: $darkgreen;
+    &:last-child {
+      color: $red;
+    }
+  }
+}

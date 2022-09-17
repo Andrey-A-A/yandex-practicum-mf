@@ -1,0 +1,57 @@
+@import '../components/search';
+@import '../components/chatlist';
+@import '../components/top';
+@import '../components/modal';
+@import '../components/message';
+@import '../components/sending';
+
+.chats {
+  @include min-max(32rem, 100%, 0);
+  display: flex;
+  flex-wrap: wrap;
+  &__left {
+    background-color: $background;
+    flex-basis: 31rem;
+  }
+  &__profile-link {
+    display: flex;
+    font-size: 2rem;
+    justify-content: space-around;
+    padding: 2.5rem 0 0 0;
+    & a {
+      color: $darkgreen;
+      display: inline-block;
+      & svg {
+        width: 2.8rem;
+        height: 2.8rem;
+        fill: $darkgreen;
+        &:hover {
+          fill: $lightgreen;
+        }
+      }
+    }
+  }
+  &__right {
+    max-width: 100%;
+    flex: 2;
+    margin: 0 auto;
+    border: 0.1rem solid $active;
+    &-date {
+      margin: 1rem auto;
+      width: 7rem;
+      font-size: 1.2rem;
+      color: $darkgreen;
+    }
+  }
+}
+.plug {
+  width: 20rem;
+  padding: 2rem;
+  background: $background;
+  font-size: 2rem;
+  margin: 5rem auto;
+  border-radius: 1rem;
+  & a {
+    color: $black;
+  }
+}

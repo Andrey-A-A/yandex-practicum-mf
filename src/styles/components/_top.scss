@@ -1,0 +1,48 @@
+.right__top {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem 1rem 1.4rem 2.5rem;
+  margin: 0 1rem;
+  border-bottom: 0.1rem solid $darkgreen;
+  &-left {
+    display: flex;
+    align-items: center;
+  }
+  &-avatar {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+  &-nickname {
+    font-size: 1.4rem;
+    color: $black;
+    margin-left: 1rem;
+  }
+  &-dots {
+    color: $darkgreen;
+    display: inline-block;
+    & svg {
+      width: 2.8rem;
+      height: 2.8rem;
+      fill: $darkgreen;
+      &:hover {
+        fill: $lightgreen;
+      }
+    }
+    // position: relative;
+    // width: 50px;
+    // height: 50px;
+    // color: $darkgreen;
+    // &::after {
+    //   content: '•••';
+    //   position: absolute;
+    //   top: 50%;
+    //   left: 50%;
+    //   transform: translate(-50%, -50%) rotate(90deg);
+    //   font-size: 15px;
+    //   letter-spacing: 4px;
+    //   margin-top: 2px;
+    // }
+  }
+}

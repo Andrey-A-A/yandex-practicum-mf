@@ -1,0 +1,17 @@
+.btn {
+  width: 15rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.6rem;
+  background: $darkgreen;
+  color: $gray;
+  border-radius: 1rem;
+  margin: 1.5rem auto;
+  border: 0.1rem solid $darkgray;
+  cursor: pointer;
+  &:hover {
+    background: $green;
+  }
+  & a {
+    color: $gray;
+  }
+}

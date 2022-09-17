@@ -1,0 +1,40 @@
+.lack {
+  @include min-max(32rem, 50rem, 0);
+
+  &__title {
+    color: $darkgreen;
+    font-size: 8.6rem;
+    text-align: center;
+    font-weight: bold;
+  }
+  &__description {
+    color: $darkgreen;
+    font-size: 3.2rem;
+  }
+  &__wrap {
+    position: relative;
+    padding-top: 80%;
+    & img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: auto;
+    }
+  }
+  &__link {
+    text-align: center;
+    color: $darkgreen;
+    font-size: 2rem;
+    margin: 2rem auto;
+
+    & a {
+      text-align: center;
+      color: $darkgreen;
+      font-size: 2rem;
+      &:hover {
+        color: $green;
+      }
+    }
+  }
+}

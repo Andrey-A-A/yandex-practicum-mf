@@ -1,0 +1,9 @@
+.avatar {
+  margin: 2rem auto 1rem;
+  width: 12rem;
+  height: 12rem;
+  & img {
+    width: 12rem;
+    height: 12rem;
+  }
+}
