@@ -1,6 +1,18 @@
 {{!< carcass}}
 
-<div class='wrap'>
+<div class='login__wrap'>
+  <h1>Авторизация</h1>
+  <form class='login__form'>
+    <label for='login'>Логин</label>
+    <input type='text' id='login' name='login' placeholder='stepanov' autofocus />
+    <label for='password'>Пароль</label>
+    <input type='text' id='password' name='password' placeholder='•••••••' autofocus />
+    <button type='submit' class='btn'>Вход</button>
+    <div class='btn'><a href='./index.hbs'>Вернуться назад</a></div>
+  </form>
+</div>
+
+{{!-- <div class='wrap'>
   <h1>Авторизация</h1>
   <form class='change__form'>
     {{#each reg}}
@@ -9,4 +21,4 @@
   <button type='submit' class='btn'>Сохранить</button>
   <div class="btn"><a href="./index.hbs">Вернуться назад</a></div>
   </form>
-</div>
+</div> --}}

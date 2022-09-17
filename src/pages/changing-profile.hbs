@@ -2,6 +2,19 @@
 
 <div class='wrap'>
   {{>"data-list/avatar"}}
+  <div class="change__avatar">
+  <p>Выберете вашу фотографию</p>
+    <form class='change__avatar-file' enctype='multipart/form-data'>
+      <label class='label'>
+        <img src='../assets/img/clip.svg' alt='' />
+        <input type='file' name='avatar' />
+      </label>
+      <button type='submit' class='sending__button'><img src='../assets/img/send.svg' alt='' />
+      </button>
+    </form>
+  </div>
+
+  
   <form class='change__form'>
     {{#each list}}
       {{>"change-data/change-data"}}
