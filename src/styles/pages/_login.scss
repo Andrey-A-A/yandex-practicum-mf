@@ -1,0 +1,31 @@
+.login__wrap {
+  @include min-max(32rem, 100%, 0);
+  padding-top: 3rem;
+  & .heading {
+    font-size: 2rem;
+    color: $darkgreen;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.login__form {
+  @include min-max-m(32rem, 36rem, 1.5rem, 0);
+  margin: 2rem auto 2rem;
+  background: $background;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  & label {
+    padding: 1rem 0;
+    font-size: 1.4rem;
+    color: $black;
+  }
+  & input {
+    background: none;
+    border: none;
+    border-bottom: 0.1rem solid $darkgreen;
+    font-size: 1.4rem;
+    color: $black;
+  }
+}
