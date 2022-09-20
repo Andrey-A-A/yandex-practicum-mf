@@ -1,26 +1,32 @@
 [
   {
     "item": "Почта",
-    "item-data": "mail@yandex.ru"
+    "item-data": "mail@yandex.ru",
+    "name": "email"
   },
   {
     "item": "Логин",
-    "item-data": "stepanov"
+    "item-data": "stepanov",
+    "name": "login"
   },
   {
     "item": "Имя",
-    "item-data": "Степан"
+    "item-data": "Степан",
+    "name": "first_name"
   },
   {
     "item": "Фамилия",
-    "item-data": "Степанов"
+    "item-data": "Степанов",
+    "name": "second_name"
   },
   {
     "item": "Имя в чате",
-    "item-data": "Степан"
+    "item-data": "Степан",
+    "name": "display_name"
   },
   {
     "item": "Телефон",
-    "item-data": "+79167777777"
+    "item-data": "+79167777777",
+    "name": "phone"
   }
 ]

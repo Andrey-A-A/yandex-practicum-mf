@@ -4,8 +4,9 @@
   "description": "",
   "scripts": {
     "dev": "parcel src/pages/index.hbs --no-cache",
-    "build": "parcel build src/pages/index.hbs && node ./server.js --no-cache",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel build src/pages/index.hbs && node ./server.js --no-cache",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build src/pages/index.hbs"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,6 @@
     "express": "^4.18.1"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=16.13.1"
   }
 }
