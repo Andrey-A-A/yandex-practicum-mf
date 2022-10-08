@@ -1,10 +1,5 @@
 .wrap__registration {
   @include min-max(32rem, 100%, 0);
-  // min-width: 32rem;
-  // max-width: 100%;
-  // box-sizing: border-box;
-  // margin: 0 auto;
-  // padding: 0;
   & h1 {
     font-size: 2rem;
     color: $darkgreen;
