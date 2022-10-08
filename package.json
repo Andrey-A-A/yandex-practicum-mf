@@ -6,7 +6,7 @@
     "dev": "parcel src/**/*.html --no-cache",
     "start": "parcel build src/**/*.html && node ./server.js --no-cache",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build src/pages/index.hbs"
+    "build": "parcel build src/**/*.html"
   },
   "keywords": [],
   "author": "",
