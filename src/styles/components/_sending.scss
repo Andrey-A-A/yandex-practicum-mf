@@ -3,6 +3,7 @@
 }
 .example-1 {
   display: flex;
+  
 }
 .example-1 input[type='file'] {
   outline: 0;
@@ -30,10 +31,24 @@
   padding-left: 2rem;
 }
 .sending__button {
+  margin-left: 3rem;
+  width: 10rem;
+  height: 3rem;
+  color: $background;
+  border: 0 solid;
+  border-radius: 1rem;
+  background: $darkgreen;
+  cursor: pointer;
+}
+.sending__button-img {
   width: 3rem;
   height: 3rem;
   border: none;
   outline: none;
   background: transparent;
   cursor: pointer;
+}
+
+.example-1__wrap {
+  width: 100%;
 }
