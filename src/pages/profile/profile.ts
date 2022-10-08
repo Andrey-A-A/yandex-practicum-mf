@@ -37,7 +37,7 @@ export class ProfilePage extends Block {
     <div class="management">
       <a href='/pages/changingProfile'>Изменить данные</a>
       <a href='/pages/changingPassword'>Изменить пароль</a>
-      <a href='pages/'>Выйти</a>
+      <a href='/'>Выйти</a>
     </div>
   </div>
     `

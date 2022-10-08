@@ -47,4 +47,3 @@ export class Chat extends Block {
     `
   } 
 }
-

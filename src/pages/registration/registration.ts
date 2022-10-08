@@ -253,7 +253,7 @@ export class RegistrationPage extends Block {
       }}}
       {{#if error}}{{error}}{{/if}}
       {{{Button textContent="Регистрация" className="btn" onClick=onSubmit}}}
-      <div class='btn'><a href='./pages/chats'>Вернуться назад</a></div>
+      <div class='btn'><a href='/pages/chats'>Вернуться назад</a></div>
       </form>
     </div>
     `

@@ -144,7 +144,7 @@ export class ChangingPasswordPage extends Block {
       }}}
       {{#if error}}{{error}}{{/if}}
       {{{Button textContent="Сохранить" className="btn" onClick=onSubmit}}}
-    <div class="btn"><a href="./profile.hbs">Вернуться назад</a></div>
+    <div class="btn"><a href="/pages/profile">Вернуться назад</a></div>
     </form>
   </div>
     `

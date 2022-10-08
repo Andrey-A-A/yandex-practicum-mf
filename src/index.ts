@@ -5,7 +5,7 @@ import Button from './components/Button';
 import Input from './components/input';
 import ControlledInput from './components/controlledInput';
 import ErrorComponent from './components/error';
-import {LoginPage} from './pages/Login/login';
+import LoginPage from './pages/login';
 
 registerComponent(Button);
 registerComponent(Input);

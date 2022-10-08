@@ -1,5 +1,5 @@
 import Block from '../../core/Block';
-import { validateForm, ValidateType } from '../../helpers/validateForm';
+import { validateForm, ValidateType } from '../../helpers/validateRegForm';
 import ControlledInput from '../../components/controlledInput';
 
 export class LoginPage extends Block {
@@ -91,8 +91,8 @@ export class LoginPage extends Block {
         id="passoword"
       }}}
       {{{Button textContent="Вход" className="btn" onClick=onSubmit}}}
-      <div class='btn'><a href='./pages/registration'>Регистрация</a></div>
-      <div class='btn'><a href='./pages/chats'>Вернуться назад</a></div>
+      <div class='btn'><a href='/pages/registration'>Регистрация</a></div>
+      <div class='btn'><a href='/pages/chats'>Вернуться назад</a></div>
     </form>
   </div>
     `;
