@@ -1,5 +1,5 @@
 import Block from '../../core/Block';
-import { validateForm, ValidateType } from '../../helpers/validateForm';
+import { validateForm, ValidateType } from '../../helpers/validateRegForm';
 import Input from '../input';
 
 interface ControlledInputProps {
@@ -39,12 +39,6 @@ export class ControlledInput extends Block {
 
       element?.refs.errorRef.setProps({ text: errorMessage });
 
-        // const errorLogin = validateForm([{ type: ValidateType.Login, value: inputEl.value }]);
-        // this.refs.errorRef.setProps({ text: errorLogin });
-        
-
-        // const errorPassword = validateForm([{ type: ValidateType.Password, value: inputEl.value }]);
-        // this.refs.errorRef.setProps({ text: errorPassword });
       },
     });
   }

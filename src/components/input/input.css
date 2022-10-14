@@ -1,15 +1,8 @@
 .input {
-  /* width: 100%;
-  padding: 12px 20px;
-  box-sizing: border-box;
-  border-radius: var(--message-border-radius);
-  background: var(--message-my-background);
-  border: 0;
-  margin-bottom: 5px; */
   width: 100%;
   background: none;
-    border: none;
-    border-bottom: 0.1rem solid #036a19;
-    font-size: 1.4rem;
-    color: black;
+  border: none;
+  border-bottom: 0.1rem solid #036a19;
+  font-size: 1.4rem;
+  color: black;
 }

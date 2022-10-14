@@ -33,29 +33,43 @@ export class RegistrationPage extends Block {
       onInput: (e: Event): void => {
         
         const inputEl = e.target as HTMLInputElement;
-              
         const type = ValidateType[inputEl.name as keyof typeof ValidateType];
-                
         const errorMessage = validateForm([{ type: type, value: inputEl.value }]);
-                
+
+        //const Refs = this.refs;
+        
+        
+        
         let el;
-        if (type === ValidateType.Login) {
-          el = this.refs.loginInputRef;
-        } else if (type === ValidateType.Password) {
-          el = this.refs.passwordInputRef;
-        } else if (type === ValidateType.ReplayPassword) {
-          el = this.refs.replayPasswordInputRef;
-        } else if (type === ValidateType.Email) {
-          el = this.refs.emailInputRef;
-        } else if (type === ValidateType.FirstName) {
-          el = this.refs.firstNameInputRef;
-        } else if (type === ValidateType.LastName) {
-          el = this.refs.lastNameInputRef;
-        } else if (type === ValidateType.NickName) {
-          el = this.refs.nickNameInputRef;
-        } else if (type === ValidateType.Phone) {
-          el = this.refs.phoneInputRef;
-        } 
+        for (const key in ValidateType) {
+          const keyI = key as keyof typeof ValidateType;
+          if (type === ValidateType[keyI]) {
+            el = this.refs[`${type}InputRef`]
+          }
+          
+        }
+        
+        
+                
+        
+        // if (type === ValidateType.Login) {
+        //   el = this.refs.loginInputRef;
+        // } else if (type === ValidateType.Password) {
+        //   el = this.refs.passwordInputRef;
+        // } else if (type === ValidateType.ReplayPassword) {
+        //   el = this.refs.replayPasswordInputRef;
+        // } else if (type === ValidateType.Email) {
+        //   el = this.refs.emailInputRef;
+        // } else if (type === ValidateType.FirstName) {
+        //   el = this.refs.firstNameInputRef;
+        // } else if (type === ValidateType.LastName) {
+        //   el = this.refs.lastNameInputRef;
+        // } else if (type === ValidateType.NickName) {
+        //   el = this.refs.nickNameInputRef;
+        // } else if (type === ValidateType.Phone) {
+        //   el = this.refs.phoneInputRef;
+        // } 
+        // console.log('el=', el);
         
         el?.refs.errorRef.setProps({ text: errorMessage });
       },
@@ -75,6 +89,8 @@ export class RegistrationPage extends Block {
         const emailEl = this.element?.querySelector('input[name="Email"]') as HTMLInputElement;
 
 
+        console.log('validateForm=', validateForm);
+        
         const errorMessageLogin = validateForm([
           { type: ValidateType.Login, value: loginEl.value }
         ]);

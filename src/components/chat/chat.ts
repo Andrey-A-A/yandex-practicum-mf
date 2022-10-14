@@ -31,14 +31,14 @@ export class Chat extends Block {
     return `
       <a href={{link}} class='chats__list {{active}}'>
         <div class='chats__list-avatar'>
-          <img src={{src}} width="45" height="45"/>
+          <img src={{src}} width="45" height="45" alt="avatar"/>
         </div>
         <div class='chats__list-content'>
           <div class='chats__list-nickname'>{{nickName}}</div>
           <div class='chats__list-text'>{{lastMessage}}</div>
         </div>
         <div class='chats__list-activity'>
-          <div class='chats__list-time'>{{time}}</div>
+          <time class='chats__list-time'>{{time}}</time>
           <div class='chats__list-number'>
             <div>{{quantity}}</div>
           </div>

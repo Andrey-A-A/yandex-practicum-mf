@@ -35,6 +35,7 @@ export default class Block<P = any> {
   protected state: any = {};
   protected refs: { [key: string]: HTMLElementWithRefs } = {};
 
+
   public constructor(props?: P) {
     const eventBus = new EventBus<Events>();
 
@@ -144,11 +145,6 @@ export default class Block<P = any> {
   }
 
   _makePropsProxy(props: any): any {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
-    
-    //const self = this;
-
     return new Proxy(props as unknown as object, {
       get(target: Record<string, unknown>, prop: string) {
         const value = target[prop];

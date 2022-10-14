@@ -16,6 +16,10 @@ type ValidateRule = {
   value: string;
 };
 
+const NAME = /^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z-]{1,20}$/;
+const PASSWORD = /^((?=.*\d)(?=.*[A-Z])[a-zA-Z0-9]{8,41})$/
+const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+const PHONE_REGEXP = /^((8|\+)[0-9]{10,15})$/;
 
 export function validateForm(rules: ValidateRule[]) {
 
@@ -38,7 +42,6 @@ export function validateForm(rules: ValidateRule[]) {
         break;
       } 
     } else if (type === ValidateType.Password || type === ValidateType.ReplayPassword || type === ValidateType.OldPassword) {
-      const PASSWORD = /^((?=.*\d)(?=.*[A-Z])[a-zA-Z0-9]{8,41})$/
       const isEmailValid = (value: string) => {
         return PASSWORD.test(value);
       }
@@ -50,7 +53,6 @@ export function validateForm(rules: ValidateRule[]) {
         break;
       } 
     } else if (type === ValidateType.FirstName) {
-      const NAME = /^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z-]{1,20}$/;
       const isEmailValid = (value: string) => {
         return NAME.test(value);
       }
@@ -70,7 +72,6 @@ export function validateForm(rules: ValidateRule[]) {
         break;
       }
     } else if (type === ValidateType.LastName) {
-      const NAME = /^[А-ЯЁA-Z][а-яА-ЯёЁa-zA-Z-]{1,20}$/;
       const isEmailValid = (value: string) => {
         return NAME.test(value);
       }
@@ -82,7 +83,7 @@ export function validateForm(rules: ValidateRule[]) {
         break;
       } 
     } else if (type === ValidateType.Email) {
-      const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+      
       const isEmailValid = (value: string) => {
         return EMAIL_REGEXP.test(value);
       }
@@ -91,7 +92,7 @@ export function validateForm(rules: ValidateRule[]) {
         break;
       } 
     } else if (type === ValidateType.Phone) {
-      const PHONE_REGEXP = /^((8|\+)[0-9]{10,15})$/;
+      
       const isEmailValid = (value: string) => {
         return PHONE_REGEXP.test(value);
       }

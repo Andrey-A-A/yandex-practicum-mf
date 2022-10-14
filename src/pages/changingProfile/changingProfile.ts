@@ -1,11 +1,14 @@
 require('babel-core/register');
 import Block from '../../core/Block';
+import registerComponent from '../../core/registerComponent';
+
 import Input from '../../components/input';
 import Data from '../../components/data';
-import registerComponent from '../../core/registerComponent';
 import Button from '../../components/Button';
 import ErrorComponent from '../../components/error';
+
 import { validateForm, ValidateType } from '../../helpers/validateRegForm';
+
 import avatar from '../../assets/img/avatar.png';
 import clip from '../../assets/img/clip.svg';
 import send from '../../assets/img/send.svg'

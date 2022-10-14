@@ -13,15 +13,11 @@ export class NotFoundPage extends Block {
 
   static componentName = 'NotFoundPage';
 
-  constructor() {
-    super()
-  }
-
   render() {
     return `
       <div class='lack'>
         <h1 class='lack__title'>404</h1>
-        <h3 class='lack__description'>Нет такой страницы, извините</h3>
+        <h2 class='lack__description'>Нет такой страницы, извините</h2>
         <div class='lack__wrap'>
           <img src='${Q600}' alt='404' />
         </div>
