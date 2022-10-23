@@ -1,8 +1,9 @@
 import Block from '../../core/Block';
 
+type SvgInHtml = HTMLElement & SVGElement;
 
 interface ButtonProps {
-  textContent?: string;
+  textContent?: string|SvgInHtml;
   className?: string;
   onClick: () => void;
 }
@@ -17,7 +18,7 @@ export class Button extends Block {
 
   protected render(): string {
     return `
-    <button type="button" class="{{className}}" value="">{{textContent}}</button>
+    <button type="button" class="{{className}}" value=""><div data-slot="1">{{textContent}}</div></button>
     `;
   }
 }

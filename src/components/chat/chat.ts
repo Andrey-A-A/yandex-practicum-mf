@@ -4,6 +4,7 @@ import Block from '../../core/Block';
 interface ChatProps {
   onInput?: () => void;
   onFocus?: () => void;
+  onClick?: () => void;
   type?: 'text' | 'password' | 'email';
   placeholder?: string;
   value?: string;
@@ -24,8 +25,8 @@ export class Chat extends Block {
 
   static componentName = 'Chat';
 
-  constructor(props: ChatProps) {
-    super({...props})
+  constructor({onClick, ...props}: ChatProps) {
+    super({...props, events: { click: onClick }})
   }
   protected render(): string {
     return `

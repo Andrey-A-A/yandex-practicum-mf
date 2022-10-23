@@ -1,8 +1,31 @@
 import Block from '../../core/Block';
 import { validateForm, ValidateType } from '../../helpers/validateRegForm';
+import { CoreRouter } from '../../core';
+import {Store} from '../../core/Store';
 import ControlledInput from '../../components/controlledInput';
+import { withStore, withRouter } from '../../utils';
+import { login, logout } from '../../services/auth';
+import Button from '../../components/Button';
+import Input from '../../components/input';
+import registerComponent from '../../core/registerComponent'
+import ErrorComponent from '../../components/error';
 
-export class LoginPage extends Block {
+registerComponent(Button);
+registerComponent(Input);
+registerComponent(ControlledInput);
+registerComponent(ErrorComponent);
+
+type LoginPageProps = {
+  router: CoreRouter;
+  store: Store<AppState>;
+  formError?: () => string | null;
+  onInput: (e: Event) => void;
+  onSubmit: () => void;
+  onLogout: () => void;
+  onLinkSignUp?: (e: Event) => void;
+};
+
+export class LoginPage extends Block<LoginPageProps> {
 
   static componentName = 'LoginPage';
 
@@ -10,9 +33,8 @@ export class LoginPage extends Block {
     super();
     
     this.setProps({
-      error: '',
-      loginValue: '',
-      passwordValue: '',
+      store: window.store,
+      router: window.router, 
       onInput: (e: Event): void => {
         
         const inputEl = e.target as HTMLInputElement;
@@ -28,8 +50,7 @@ export class LoginPage extends Block {
         }
         el?.refs.errorRef.setProps({ text: errorMessage });
       },
-      onFocus: (): void => console.log('focus'),
-      onBlur: (): void => console.log('blur'),
+
       onSubmit: (): void => {
                 
         const loginEl = this.element?.querySelector('input[name="Login"]') as HTMLInputElement;
@@ -55,12 +76,17 @@ export class LoginPage extends Block {
         } else {
           
           const data = {
-            loginValue: loginEl.value,
-            passwordValue: passowrdEl.value,
+            login: loginEl.value,
+            password: passowrdEl.value,
           }
-          console.log("Данные введенные в форму", data);
+
+          this.props.store.dispatch(login, data);
         }
-      }
+      },
+      onLogout: () => this.props.store.dispatch(logout),
+      onLinkSignUp: (e: Event): void => {
+        e.preventDefault;
+        window.router.go('/sign-up');}
     });
   }
 
@@ -91,11 +117,15 @@ export class LoginPage extends Block {
         id="passoword"
       }}}
       {{{Button textContent="Вход" className="btn" onClick=onSubmit}}}
-      <div class='btn'><a href='/pages/registration'>Регистрация</a></div>
-      <div class='btn'><a href='/pages/chats'>Вернуться назад</a></div>
+      {{{Button textContent="Выйти" className="btn" onClick=onLogout}}}
+      <div class='btn'>
+        {{#Link href="/sign-up" textContent="Регистрация" onClick=onLinkSignUp}}{{/Link}}
+      </div>
+      <div class='btn'><a href='/messenger'>Вернуться назад</a></div>
     </form>
   </div>
     `;
   }
 }
 
+export default withRouter(withStore(LoginPage));

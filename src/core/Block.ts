@@ -13,6 +13,11 @@ interface HTMLElementWithRefs extends HTMLElement {
 
 type Events = Values<typeof Block.EVENTS>;
 
+export interface BlockClass<P> extends Function {
+  new (props: P): Block<P>;
+  componentName?: string;
+}
+
 export default class Block<P = any> {
   static EVENTS = {
     INIT: 'init',
@@ -55,14 +60,14 @@ export default class Block<P = any> {
     eventBus.emit(Block.EVENTS.INIT, this.props);
   }
 
-  _registerEvents(eventBus: EventBus<Events>) {
+private _registerEvents(eventBus: EventBus<Events>) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  _createResources() {
+private _createResources() {
     this._element = this._createDocumentElement('div');
   }
 
@@ -75,21 +80,29 @@ export default class Block<P = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
   }
 
-  _componentDidMount(props: P) {
+private _componentDidMount(props: P) {
     this.componentDidMount(props);
   }
 
   componentDidMount(props: P) {}
 
-  _componentDidUpdate(oldProps: P, newProps: P) {
+private _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
     }
+    this.children = {};
     this._render();
   }
 
-  componentDidUpdate(oldProps: P, newProps: P) {
+private _componentWillUnmount() {
+    this.eventBus().destroy();
+    this.componentWillUnmount();
+  }
+
+  componentWillUnmount() {}
+
+  componentDidUpdate(_oldProps: P, _newProps: P) {
     return true;
   }
 
@@ -113,7 +126,7 @@ export default class Block<P = any> {
     return this._element;
   }
 
-  _render() {
+private _render() {
     const fragment = this._compile();
 
     this._removeEvents();
@@ -144,7 +157,7 @@ export default class Block<P = any> {
     return this.element!;
   }
 
-  _makePropsProxy(props: any): any {
+private _makePropsProxy(props: any): any {
     return new Proxy(props as unknown as object, {
       get(target: Record<string, unknown>, prop: string) {
         const value = target[prop];
@@ -164,11 +177,11 @@ export default class Block<P = any> {
     }) as unknown as P;
   }
 
-  _createDocumentElement(tagName: string) {
+private _createDocumentElement(tagName: string) {
     return document.createElement(tagName);
   }
 
-  _removeEvents() {
+private _removeEvents() {
     const events: Record<string, () => void> = (this.props as any).events;
 
     if (!events || !this._element) {
@@ -180,7 +193,7 @@ export default class Block<P = any> {
     });
   }
 
-  _addEvents() {
+private _addEvents() {
     const events: Record<string, () => void> = (this.props as any).events;
 
     if (!events) {
@@ -192,7 +205,7 @@ export default class Block<P = any> {
     });
   }
 
-  _compile(): DocumentFragment {
+private _compile(): DocumentFragment {
     const fragment = document.createElement('template');
 
     /**
@@ -230,12 +243,23 @@ export default class Block<P = any> {
       /**
        * Ищем элемент layout-а, куда вставлять детей
        */
-      const layoutContent = content.querySelector('[data-layout="1"]');
+    //   const layoutContent = content.querySelector('[data-layout="1"]');
 
-      if (layoutContent && stubChilds.length) {
-        layoutContent.append(...stubChilds);
-      }
-    });
+    //   if (layoutContent && stubChilds.length) {
+    //     layoutContent.append(...stubChilds);
+    //   }
+    // });
+
+    /**
+       * Ищем элемент slota-а, куда вставлять детей
+       */
+     const slotContent = content.querySelector('[data-slot="1"]') as HTMLDivElement;
+
+     if (slotContent && stubChilds.length) {
+       slotContent.append(...stubChilds);
+       delete slotContent.dataset.slot;
+     }
+   });
 
     /**
      * Возвращаем фрагмент

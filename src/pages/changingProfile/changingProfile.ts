@@ -1,5 +1,9 @@
 require('babel-core/register');
 import Block from '../../core/Block';
+import {withUser, withStore, withRouter } from '../../utils';
+import { CoreRouter } from '../../core';
+import {Store} from '../../core/Store'
+import { userUp } from '../../services/auth';
 import registerComponent from '../../core/registerComponent';
 
 import Input from '../../components/input';
@@ -19,16 +23,25 @@ registerComponent(Button);
 registerComponent(ErrorComponent);
 
 
-
+type ChangingProfilePageProps = {
+  router: CoreRouter;
+  store: Store<AppState>;
+  user: User | null;
+  onInput?: (e: Event) => void;
+  onFocus?: () => void; 
+  onAvatarUp?: () => void;
+  onSubmit?: () => void;
+};
 
 export class ChangingProfilePage extends Block {
 
   static componentName = 'ChangingProfilePage';
 
-  constructor() {
-    super()
+  constructor(props: ChangingProfilePage) {
+    super(props)
 
     this.setProps({
+      store: window.store,
       onInput: (e: Event): void => {
         const inputEl = e.target as HTMLInputElement;
               
@@ -45,7 +58,7 @@ export class ChangingProfilePage extends Block {
           el = this.refs.firstNameInputRef;
         } else if (type === ValidateType.LastName) {
           el = this.refs.lastNameInputRef;
-        } else if (type === ValidateType.NickName) {
+        } else if (type === ValidateType.DisplayName) {
           el = this.refs.nickNameInputRef;
         } else if (type === ValidateType.Phone) {
           el = this.refs.phoneInputRef;
@@ -54,12 +67,21 @@ export class ChangingProfilePage extends Block {
         el?.refs.errorRef.setProps({ text: errorMessage });
       },
       onFocus: (): void => console.log('focus'),
-      onSubmit: (): void => {
+      onAvatarUp: (): void => {
+        const formAvatar = this.element?.querySelector(".change__avatar-file") as HTMLFormElement;
+        console.log('formAvatar=', formAvatar);
+        const formData = new FormData(formAvatar);
 
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', 'https://ya-praktikum.tech/api/v2/user/profile/avatar');
+        xhr.withCredentials = true;
+        xhr.send(formData);
+      },
+      onSubmit: (): void => {
         const loginEl = this.element?.querySelector('input[name="Login"]') as HTMLInputElement;
         const firstNameEl = this.element?.querySelector('input[name="FirstName"]') as HTMLInputElement;
         const lastNameEl = this.element?.querySelector('input[name="LastName"]') as HTMLInputElement;
-        const nickNameEl = this.element?.querySelector('input[name="NickName"]') as HTMLInputElement;
+        const displayNameEl = this.element?.querySelector('input[name="NickName"]') as HTMLInputElement;
         const phoneEl = this.element?.querySelector('input[name="Phone"]') as HTMLInputElement;
         const emailEl = this.element?.querySelector('input[name="Email"]') as HTMLInputElement;
 
@@ -81,7 +103,7 @@ export class ChangingProfilePage extends Block {
         ]);
 
         const errorMessageNickName = validateForm([
-          { type: ValidateType.NickName, value: nickNameEl.value }
+          { type: ValidateType.DisplayName, value: displayNameEl.value }
         ]);
 
         const errorMessageEmail = validateForm([
@@ -113,37 +135,45 @@ export class ChangingProfilePage extends Block {
         } else {
           
           const data = {
-            loginValue: loginEl.value,
-            firstNameValue: firstNameEl.value,
-            lastNameValue: lastNameEl.value,
-            emailValue: emailEl.value,
-            nickNameValue: nickNameEl,
-            phoneValue: phoneEl.value,
+            first_name: firstNameEl.value,
+            second_name: lastNameEl.value,
+            login: loginEl.value,
+            email: emailEl.value,
+            phone: phoneEl.value,
+            display_name: displayNameEl.value,
           }
           console.log("Данные введенные в форму", data);
+          this.props.store.dispatch(userUp, data);
         
         }
         console.log('End!');
         
       }
-    })
+    });
   }
 
   render() {
+    const { avatar, displayName, email, firstName, id, login, phone, secondName } = this.props.user;
+    if (!this.props.user) {
+      return `
+      <div class='wrap'>Пользователь не авторизован</>
+      `
+    }
+
     return `
     <div class='wrap'>
       <div class='avatar'>
-        <img src='${avatar}' alt='Семен' />
+        <img src='${process.env.API_ENDPOINT}/resources/${avatar}' alt='Семен' />
       </div>
     <div class="change__avatar">
     <p>Выберете вашу фотографию</p>
-      <form class='change__avatar-file' enctype='multipart/form-data'>
+      <form class='change__avatar-file' name='avatar'>
         <label class='label'>
           <img src='${clip}' alt='adding a file' />
           <input type='file' name='avatar' />
         </label>
-        <button type='button' class='sending__button-img'><img src='${send}' alt='send' />
-        </button>
+        
+        {{#Button class="sending__button-img" onClick=onAvatarUp}}<img src='${send}' alt='send' />{{/Button}}
       </form>
     </div>
     <form class='change__form'>
@@ -214,9 +244,10 @@ export class ChangingProfilePage extends Block {
     }}}
     {{#if error}}{{error}}{{/if}}
     {{{Button textContent="Сохранить" className="btn" onClick=onSubmit}}}
-    <div class="btn"><a href="/pages/profile">Вернуться назад</a></div>
+    <div class="btn"><a href="/settings">Вернуться назад</a></div>
     </form>
   </div>
     `
   }
 }
+export default withRouter(withStore(withUser(ChangingProfilePage)));

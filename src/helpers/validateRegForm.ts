@@ -6,7 +6,7 @@ export enum ValidateType {
   Email = 'email',
   FirstName = 'firstName',
   LastName = 'lastName',
-  NickName = 'nickName',
+  DisplayName = 'displayName',
   Phone = 'phone',
   Message = 'message',
 }
@@ -63,7 +63,7 @@ export function validateForm(rules: ValidateRule[]) {
         errorMessage = 'Имя должно быть с заглавной буквы, более 1 буквы';
         break;
       } 
-    } else if (type === ValidateType.NickName) {
+    } else if (type === ValidateType.DisplayName) {
       if (value.length === 0) {
         errorMessage = 'Поле имя в чате не должно быть пустым';
         break;

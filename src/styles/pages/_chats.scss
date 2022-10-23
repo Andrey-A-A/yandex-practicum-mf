@@ -31,6 +31,18 @@
       }
     }
   }
+  &__left-link {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    color: $darkgreen;
+    & a {
+      text-align: center;
+      display: inline-block;
+      color: $darkgreen;
+      padding-bottom: 1rem;
+    }
+  }
   &__right {
     max-width: 100%;
     flex: 2;

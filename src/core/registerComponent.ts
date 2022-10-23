@@ -42,6 +42,8 @@ export default function registerComponent<Props>(Component: BlockConstructable<P
       }
 
       const contents = fn ? fn(this) : '';
+      
+      
 
       return `<div data-id="${component.id}">${contents}</div>`;
     },

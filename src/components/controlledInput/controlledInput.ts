@@ -27,7 +27,6 @@ export class ControlledInput extends Block {
         const typeE = ValidateType[inputEl.name as keyof typeof ValidateType];
       
         const errorMessage = validateForm([{ type: typeE, value: inputEl.value }]);
-        console.log('errorMessage=', errorMessage );
 
       let element;
 

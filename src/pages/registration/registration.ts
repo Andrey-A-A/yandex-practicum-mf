@@ -1,17 +1,20 @@
 require('babel-core/register');
 import Block from '../../core/Block';
+import { withUser, withStore, withRouter } from '../../utils';
+import { CoreRouter } from '../../core';
+import {Store} from '../../core/Store'
 import Input from '../../components/input';
 import Data from '../../components/data'
 import registerComponent from '../../core/registerComponent'
 import Button from '../../components/Button';
 import ErrorComponent from '../../components/error';
 import { validateForm, ValidateType } from '../../helpers/validateRegForm';
+import { signUp } from '../../services/auth';
 
 registerComponent(Input);
 registerComponent(Data);
 registerComponent(Button);
 registerComponent(ErrorComponent);
-
 
 export class RegistrationPage extends Block {
 
@@ -22,24 +25,22 @@ export class RegistrationPage extends Block {
 
     this.setProps({
       error: '',
-      loginValue: '',
-      passwordValue: '',
-      replayPasswordValue: '',
-      firstNameValue: '',
-      lastNameValue: '',
-      emailValue: '',
-      nickNameValue: '',
-      phoneValue: '',
+      first_name: '',
+      second_name: '',
+      login: '',
+      email: '',
+      password: '',
+      phone: '',
+      display_name: '',
+      replay_password: '',
+      store: window.store,
+      router: window.router,
       onInput: (e: Event): void => {
         
         const inputEl = e.target as HTMLInputElement;
         const type = ValidateType[inputEl.name as keyof typeof ValidateType];
         const errorMessage = validateForm([{ type: type, value: inputEl.value }]);
 
-        //const Refs = this.refs;
-        
-        
-        
         let el;
         for (const key in ValidateType) {
           const keyI = key as keyof typeof ValidateType;
@@ -49,34 +50,12 @@ export class RegistrationPage extends Block {
           
         }
         
-        
-                
-        
-        // if (type === ValidateType.Login) {
-        //   el = this.refs.loginInputRef;
-        // } else if (type === ValidateType.Password) {
-        //   el = this.refs.passwordInputRef;
-        // } else if (type === ValidateType.ReplayPassword) {
-        //   el = this.refs.replayPasswordInputRef;
-        // } else if (type === ValidateType.Email) {
-        //   el = this.refs.emailInputRef;
-        // } else if (type === ValidateType.FirstName) {
-        //   el = this.refs.firstNameInputRef;
-        // } else if (type === ValidateType.LastName) {
-        //   el = this.refs.lastNameInputRef;
-        // } else if (type === ValidateType.NickName) {
-        //   el = this.refs.nickNameInputRef;
-        // } else if (type === ValidateType.Phone) {
-        //   el = this.refs.phoneInputRef;
-        // } 
-        // console.log('el=', el);
-        
         el?.refs.errorRef.setProps({ text: errorMessage });
       },
       onFocus: (): void => console.log('focus'),
       onBlur: (): void => console.log('blur'),
       onSubmit: (): void => {
-
+        
         const loginEl = this.element?.querySelector('input[name="Login"]') as HTMLInputElement;
         const passowrdEl = this.element?.querySelector(
           'input[name="Password"]',
@@ -84,12 +63,9 @@ export class RegistrationPage extends Block {
         const replayPasswordEl = this.element?.querySelector('input[name="ReplayPassword"]') as HTMLInputElement;
         const firstNameEl = this.element?.querySelector('input[name="FirstName"]') as HTMLInputElement;
         const lastNameEl = this.element?.querySelector('input[name="LastName"]') as HTMLInputElement;
-        const nickNameEl = this.element?.querySelector('input[name="NickName"]') as HTMLInputElement;
+        const displayNameEl = this.element?.querySelector('input[name="NickName"]') as HTMLInputElement;
         const phoneEl = this.element?.querySelector('input[name="Phone"]') as HTMLInputElement;
         const emailEl = this.element?.querySelector('input[name="Email"]') as HTMLInputElement;
-
-
-        console.log('validateForm=', validateForm);
         
         const errorMessageLogin = validateForm([
           { type: ValidateType.Login, value: loginEl.value }
@@ -116,7 +92,7 @@ export class RegistrationPage extends Block {
         ]);
 
         const errorMessageNickName = validateForm([
-          { type: ValidateType.NickName, value: nickNameEl.value }
+          { type: ValidateType.DisplayName, value: displayNameEl.value }
         ]);
 
         const errorMessageEmail = validateForm([
@@ -156,23 +132,21 @@ export class RegistrationPage extends Block {
         } else {
           
           const data = {
-            loginValue: loginEl.value,
-            passwordValue: passowrdEl.value,
-            replayPasswordValue: replayPasswordEl.value,
-            firstNameValue: firstNameEl.value,
-            lastNameValue: lastNameEl.value,
-            emailValue: emailEl.value,
-            nickNameValue: nickNameEl,
-            phoneValue: phoneEl.value,
+            first_name: firstNameEl.value,
+            second_name: lastNameEl.value,
+            login: loginEl.value,
+            email: emailEl.value,
+            password: passowrdEl.value,
+            phone: phoneEl.value,
+            display_name: displayNameEl.value,
+            replay_password: replayPasswordEl.value,
           }
           console.log("Данные введенные в форму", data);
-        
+          this.props.store.dispatch(signUp, data);
         }
         console.log('End!');
-        
       }
     });
-    
   }
 
   render() {
@@ -269,9 +243,11 @@ export class RegistrationPage extends Block {
       }}}
       {{#if error}}{{error}}{{/if}}
       {{{Button textContent="Регистрация" className="btn" onClick=onSubmit}}}
-      <div class='btn'><a href='/pages/chats'>Вернуться назад</a></div>
+      <div class='btn'><a href='/login'>Вернуться назад</a></div>
       </form>
     </div>
     `
   }
 }
+
+export default withRouter(withStore(RegistrationPage));

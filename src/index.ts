@@ -1,17 +1,26 @@
 require('babel-core/register');
-import { Block, renderDOM, registerComponent } from './core';
-
-import Button from './components/Button';
-import Input from './components/input';
-import ControlledInput from './components/controlledInput';
-import ErrorComponent from './components/error';
-import LoginPage from './pages/login';
-
-registerComponent(Button);
-registerComponent(Input);
-registerComponent(ControlledInput);
-registerComponent(ErrorComponent);
+import { PathRouter } from './core';
+import {Store} from './core/Store';
+import { defaultState } from './store';
+import { initRouter } from './router';
+import { initApp } from './services/initApp';
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderDOM(new LoginPage());
+  
+  const store = new Store<AppState>(defaultState);
+  const router = new PathRouter();
+
+  window.router = router;
+  window.store = store;
+  
+  /**
+   * Инициализируем роутер
+   */
+  initRouter(router, store);
+
+  /**
+    * Загружаем данные для приложения
+    */
+  store.dispatch(initApp);
+  
 });

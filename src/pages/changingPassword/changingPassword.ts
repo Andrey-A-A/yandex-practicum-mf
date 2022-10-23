@@ -1,5 +1,9 @@
 require('babel-core/register');
 import Block from '../../core/Block';
+import {withUser, withStore, withRouter } from '../../utils';
+import { CoreRouter } from '../../core';
+import { Store } from '../../core/Store';
+import { passwordUp } from '../../services/auth';
 import Input from '../../components/input';
 import Data from '../../components/data';
 import registerComponent from '../../core/registerComponent';
@@ -16,8 +20,6 @@ registerComponent(Button);
 registerComponent(ErrorComponent);
 
 
-
-
 export class ChangingPasswordPage extends Block {
 
   static componentName = 'ChangingPasswordPage';
@@ -26,7 +28,7 @@ export class ChangingPasswordPage extends Block {
     super()
 
     this.setProps({
-      
+      store: window.store,
       onInput: (e: Event): void => {
         
         const inputEl = e.target as HTMLInputElement;
@@ -89,12 +91,12 @@ export class ChangingPasswordPage extends Block {
         } else {
           
           const data = {
-            oldPasswordValue: oldPasswordEl.value,
-            passwordValue: passowrdEl.value,
+            oldPassword: oldPasswordEl.value,
+            newPassword: passowrdEl.value,
             replayPasswordValue: replayPasswordEl.value,
           }
           console.log("Данные введенные в форму", data);
-        
+          this.props.store.dispatch(passwordUp, {oldPassword: oldPasswordEl.value, newPassword: passowrdEl.value});
         }
         console.log('End!');
         
@@ -144,9 +146,11 @@ export class ChangingPasswordPage extends Block {
       }}}
       {{#if error}}{{error}}{{/if}}
       {{{Button textContent="Сохранить" className="btn" onClick=onSubmit}}}
-    <div class="btn"><a href="/pages/profile">Вернуться назад</a></div>
+    <div class="btn"><a href="/settings">Вернуться назад</a></div>
     </form>
   </div>
     `
   }
 }
+
+export default withRouter(withStore(withUser(ChangingPasswordPage)));

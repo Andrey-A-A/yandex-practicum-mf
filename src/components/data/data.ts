@@ -46,7 +46,7 @@ export class Data extends Block {
         element = this.refs.firstNameInputRef;
       } else if (typeE === ValidateType.LastName) {
         element = this.refs.firstNameInputRef;
-      } else if (typeE === ValidateType.NickName) {
+      } else if (typeE === ValidateType.DisplayName) {
         element = this.refs.nickNameInputRef;
       } else if (typeE === ValidateType.Phone) {
         element = this.refs.phoneInputRef;

@@ -1,9 +1,4 @@
-// const METHODS = {
-//   GET: 'GET',
-//   POST: 'POST',
-//   PUT: 'PUT',
-//   DELETE: 'DELETE',
-// };
+import { request } from "http";
 
 enum METHOD {
   GET = 'GET',
@@ -12,18 +7,16 @@ enum METHOD {
   DELETE = 'DELETE' 
 };
 
-type Options = {
-  method: METHOD;
-  data?: any;
-  //data?: Record<string, unknown> | string;
+export type Options = {
+  method?: METHOD;
+  //data?: any;
+  data?: Record<string, unknown> | string;
   timeout?: number;
   headers?: Record<string, string>
 };
 
 // type OptionsWithoutMethod = Omit<Options, 'method'>;
 
-// Самая простая версия. Реализовать штучку со всеми проверками им предстоит в конце спринта
-// Необязательный метод
 function queryStringify(data: Record<string, unknown> | string) {
   if (typeof data !== 'object') {
     throw new Error('Data must be object');
@@ -36,12 +29,13 @@ function queryStringify(data: Record<string, unknown> | string) {
   }, '?');
 }
 
-export class HTTP {
+class HTTP {
   get = (url:string, options = {}) => {
     return this.request(url, { ...options, method: METHOD.GET });
   };
 
-  post = (url:string, options = {}) => {
+  post = (url:string, options: Options) => {
+        
     return this.request(url, { ...options, method: METHOD.POST });
   };
 
@@ -53,20 +47,23 @@ export class HTTP {
     return this.request(url, { ...options, method: METHOD.DELETE });
   };
 
-  request = (url:string, options: Options = {method: METHOD.GET}, timeout: Options["timeout"] = 5000) => {
-    const { headers = {}, method, data } = options;
+  request = (url:string, options: Options = {method: METHOD.GET}) => {
+    const { headers = {'Content-Type': 'application/json'}, method, data } = options;
+    const realUrl = `${process.env.API_ENDPOINT}${url}`
 
     return new Promise(function (resolve, reject) {
       if (!method) {
         reject('No method');
         return;
       }
-
+      
       const xhr = new XMLHttpRequest();
+      
       const isGet = method === METHOD.GET;
 
-      xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
-
+      xhr.open(method, isGet && !!data ? `${realUrl}${queryStringify(data)}` : realUrl );
+      xhr.responseType = 'json';
+      xhr.withCredentials = true;
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
       });
@@ -78,14 +75,16 @@ export class HTTP {
       xhr.onabort = reject;
       xhr.onerror = reject;
 
-      xhr.timeout = timeout;
       xhr.ontimeout = reject;
 
       if (isGet || !data) {
         xhr.send();
+        
       } else {
-        xhr.send(data);
+        xhr.send(JSON.stringify(data));
       }
     });
   };
 }
+
+export default new HTTP ()
